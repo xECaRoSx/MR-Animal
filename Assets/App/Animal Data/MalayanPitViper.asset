@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715aeb697637cee46af6ef11aded8ec1, type: 3}
+  m_Name: MalayanPitViper
+  m_EditorClassIdentifier: 
+  animalName: Malayan Pit Viper
+  thaiName: "\u0E07\u0E39\u0E01\u0E30\u0E1B\u0E30"
+  scientificName: Calloselasma rhodostoma
+  family: Viperidae
+  conservationStatus: 7
+  animalPrefab: {fileID: 0}
+  animationList:
+  - {fileID: 0}

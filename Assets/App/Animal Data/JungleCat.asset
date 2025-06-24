@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715aeb697637cee46af6ef11aded8ec1, type: 3}
+  m_Name: JungleCat
+  m_EditorClassIdentifier: 
+  animalName: Jungle Cat
+  thaiName: "\u0E41\u0E21\u0E27\u0E1B\u0E48\u0E32"
+  scientificName: Felis chaus
+  family: Felidae
+  conservationStatus: 7
+  animalPrefab: {fileID: 0}
+  idleAnimation: {fileID: 7400000, guid: 65bfb91900d4cde4bb5ced748151dd88, type: 2}
+  animationList:
+  - {fileID: 7400000, guid: db6cd5900cd81504c898ece3b3937e00, type: 2}
+  animalSound: {fileID: 8300000, guid: ebf0ea2f6a464534e99389dfad72364a, type: 3}
