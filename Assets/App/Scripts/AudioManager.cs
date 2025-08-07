@@ -15,6 +15,9 @@ public class AudioManager : MonoBehaviour
     [Header("Ambient Sound")]
     public AudioSource ambientSource;
 
+    [Header("Voice Over")]
+    public AudioSource VOSource;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -40,5 +43,20 @@ public class AudioManager : MonoBehaviour
     {
         if (clip != null) SFXSource.PlayOneShot(clip);
         else return;
+    }
+
+    public void PlayVO(AudioClip clip)
+    {
+        if (VOSource.isPlaying)
+            VOSource.Stop();
+
+        VOSource.clip = clip;
+        VOSource.Play();
+    }
+
+    public void StopVO()
+    {
+        if (VOSource.isPlaying)
+            VOSource.Stop();
     }
 }
