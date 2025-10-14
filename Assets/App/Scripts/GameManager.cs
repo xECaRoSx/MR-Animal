@@ -93,9 +93,11 @@ public class GameManager : MonoBehaviour
             case GameState.AnimalSelectionState:
                 UIManager.Instance.ShowSelectionScreen();
                 AnimalManager.Instance.ShowAllAnimals();
+                VFXManager.Instance.StopAllVFX();
                 break;
             case GameState.AnimalInfoState:
                 UIManager.Instance.ShowInformationScreen();
+                VFXManager.Instance.PlayVFX(VFXTriggerType.OnEnterInfoState);
                 break;
             default:
                 Debug.LogWarning("Unhandled game state: " + newState);

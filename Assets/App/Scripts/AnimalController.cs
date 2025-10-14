@@ -108,6 +108,8 @@ public class AnimalController : MonoBehaviour
         AudioManager.Instance.PlaySFX(animalData.animalSound);
 
         Debug.Log($"[AnimalController] Playing {animalData.animalName} : {stateName}");
+
+        VFXManager.Instance.PlayVFX(VFXTriggerType.OnPlayAnimation);
     }
 
     public void StopAnimation()
