@@ -22,3 +22,4 @@ MonoBehaviour:
   animationList:
   - {fileID: 7400000, guid: 5942519f60f062143a070841e016b3c4, type: 2}
   animalSound: {fileID: 8300000, guid: fee127b74d7d3db4dafa0511ffe3ba27, type: 3}
+  animalInfoVO: {fileID: 8300000, guid: 8afa9118365308a4389a1ff9c6b5d25f, type: 3}

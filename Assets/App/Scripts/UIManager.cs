@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
-using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -122,4 +119,18 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning($"[UIManager] Unknown conservation status: {data.conservationStatus}");
     }
     // ======================================================================
+
+    public void ShowPopup(string msg, System.Action onYes, System.Action onNo)
+    {
+        Debug.Log($"[UI Popup] {msg}  (auto YES for now)");
+
+        onYes?.Invoke();
+    }
+
+    public void ShowConfirm(string msg, System.Action onConfirm)
+    {
+        Debug.Log($"[UI Confirm] {msg}  (auto Confirm for now)");
+
+        onConfirm?.Invoke();
+    }
 }

@@ -2600,6 +2600,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PICOXR",
+            "id": "5eccdb5e-ade0-487f-bfd6-65a9b9328f5d",
+            "actions": [
+                {
+                    "name": "RightGrip",
+                    "type": "Button",
+                    "id": "59b2ec65-6141-4553-abb4-84383c8f41cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftPrimary",
+                    "type": "Button",
+                    "id": "af34ea71-53d2-45bf-9d92-eaf43e927520",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3657a8d7-3a1c-4fcc-b88e-54261be47280",
+                    "path": "<PXR_Controller>{RightHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightGrip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f19c3c8b-d556-4cff-b810-d04faf889351",
+                    "path": "<PXR_Controller>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

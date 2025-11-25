@@ -9,7 +9,7 @@ public class EnableSeeThrough : MonoBehaviour
     private Camera mainCamera;
 
     [SerializeField]
-    private float enableSeeThroughAfter = 1.0f;
+    private float enableSeeThroughAfter = 0.5f;
 
     private void Awake()
     {

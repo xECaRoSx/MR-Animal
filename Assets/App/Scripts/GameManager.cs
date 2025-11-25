@@ -15,8 +15,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameState CurrentState { get; private set; }
 
+    public EnableSeeThrough enableSeeThrough;
+
+    public GameObject anchorRoot;
+
     [Header("Test Settings")]
     [SerializeField] private bool skipAnchoring = false; // For testing purposes
+
+    private bool hasPlayedSelectionVO = false;
 
     private void Awake()
     {
@@ -42,32 +48,34 @@ public class GameManager : MonoBehaviour
         if (skipAnchoring)
         {
             SetState(GameState.AnimalSelectionState);
-            Debug.Log("Skipping Anchoring, starting game directly in Animal Selection");
+            Debug.Log("[GameManager] Skipping Anchoring -> Starting at AnimalSelectionState");
         }
         else
         {
             SetState(GameState.AnchoringState);
-            Debug.Log("Starting...");
+            Debug.Log("[GameManager] StartGame pressed -> Entering AnchoringState");
         }
     }
-    public void ConfirmAnchor()
+
+    public void ConfirmButton()
     {
+        AnchorManager.Instance.ConfirmAnchor();
         SetState(GameState.AnimalSelectionState);
-        Debug.Log("Anchor Confirmed");
+        Debug.Log("[GameManager] Anchor confirmed -> Entering AnimalSelectionState");
     }
     public void ReturnToSelection()
     {
         SetState(GameState.AnimalSelectionState);
-        Debug.Log("Returning to Animal Selection");
+        Debug.Log("[GameManager] Returning to AnimalSelectionState");
     }
     public void ReturnToTitle()
     {
         SetState(GameState.TitleScreenState);
-        Debug.Log("Returning to Title Screen");
+        Debug.Log("[GameManager] Returning to TitleScreenState");
     }
     public void QuitGame()
     {
-        Debug.Log("Game Quit");
+        Debug.Log("[GameManager] QuitGame called");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #elif UNITY_ANDROID || UNITY_STANDALONE
@@ -86,15 +94,29 @@ public class GameManager : MonoBehaviour
             case GameState.TitleScreenState:
                 UIManager.Instance.ShowTitleScreen();
                 AnimalManager.Instance.HideAllAnimals();
+                anchorRoot.SetActive(false);
                 break;
+
             case GameState.AnchoringState:
                 UIManager.Instance.ShowAnchoringScreen();
+                AudioManager.Instance.PlayVObyID("VO1");
+                AnchorManager.Instance.EnablePreview(true);
+                enableSeeThrough.SeeThroughOn();
                 break;
+
             case GameState.AnimalSelectionState:
                 UIManager.Instance.ShowSelectionScreen();
                 AnimalManager.Instance.ShowAllAnimals();
                 VFXManager.Instance.StopAllVFX();
+
+                if (!hasPlayedSelectionVO)
+                {
+                    AudioManager.Instance.PlayVObyID("VO2");
+                    hasPlayedSelectionVO = true;
+                    Debug.Log("[GameManager] Playing first-time Selection VO");
+                }
                 break;
+
             case GameState.AnimalInfoState:
                 UIManager.Instance.ShowInformationScreen();
                 VFXManager.Instance.PlayVFX(VFXTriggerType.OnEnterInfoState);

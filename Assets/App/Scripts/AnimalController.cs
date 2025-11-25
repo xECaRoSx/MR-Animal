@@ -61,6 +61,7 @@ public class AnimalController : MonoBehaviour
         AnimalManager.Instance.ShowOnlySelectedAnimal(this);
         UIManager.Instance.ShowAnimalInfo(animalData, this);
         AudioManager.Instance.PlaySFX(animalData.animalSound);
+        AudioManager.Instance.PlayVObyClip(animalData.animalInfoVO);
 
         Vector3 targetPos = new Vector3(0, originalPosition.y, 0);
         Quaternion targetRot = Quaternion.identity;

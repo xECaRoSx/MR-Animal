@@ -16,6 +16,7 @@ public class AnimalData : ScriptableObject
     public List<AnimationClip> animationList;
 
     public AudioClip animalSound;
+    public AudioClip animalInfoVO;
 }
 public enum ConservationStatus
 {
