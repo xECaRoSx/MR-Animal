@@ -22,25 +22,17 @@ public class AnimalController : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = overrideController;
 
+        // Only play idle if exists
         if (animalData.idleAnimation != null)
         {
             overrideController["Idle"] = animalData.idleAnimation;
             animator.Play("Idle");
-            Debug.Log($"[Override] Idle clip set for {animalData.animalName}: {animalData.idleAnimation.name}");
         }
-        else
-        {
-            Debug.LogWarning($"[AnimalController] {animalData.animalName} has no idleClip assigned.");
-        }
-
-        originalPosition = transform.localPosition;
-        originalRotation = transform.localRotation;
-        originalScale = transform.localScale;
     }
 
     // ==================== XR Interaction Event Hooks =====================
@@ -60,9 +52,16 @@ public class AnimalController : MonoBehaviour
         GameManager.Instance.SetState(GameState.AnimalInfoState);
         AnimalManager.Instance.ShowOnlySelectedAnimal(this);
         UIManager.Instance.ShowAnimalInfo(animalData, this);
-        AudioManager.Instance.PlaySFX(animalData.animalSound);
-        AudioManager.Instance.PlayVObyClip(animalData.animalInfoVO);
 
+        // --- Play SFX if exists ---
+        if (animalData.animalSound != null)
+            AudioManager.Instance.PlaySFX(animalData.animalSound);
+
+        // --- Play VO if exists ---
+        if (animalData.animalInfoVO != null)
+            AudioManager.Instance.PlayVObyClip(animalData.animalInfoVO);
+
+        // --- Transform movement ---
         Vector3 targetPos = new Vector3(0, originalPosition.y, 0);
         Quaternion targetRot = Quaternion.identity;
         Vector3 targetScale = originalScale * scaleFactor;
@@ -77,7 +76,6 @@ public class AnimalController : MonoBehaviour
         isSelected = false;
 
         GameManager.Instance.SetState(GameState.AnimalSelectionState);
-        AnimalManager.Instance.ShowAllAnimals();
         UIManager.Instance.ShowSelectionScreen();
 
         if (moveRoutine != null) StopCoroutine(moveRoutine);
@@ -89,28 +87,33 @@ public class AnimalController : MonoBehaviour
     // ===================== Animation Management =========================
     public void PlayAnimation(int actionIndex)
     {
-        if (animalData.animationList == null || actionIndex < 0 || actionIndex >= animalData.animationList.Count)
+        if (animalData.animationList == null ||
+        actionIndex < 0 ||
+        actionIndex >= animalData.animationList.Count)
         {
-            Debug.LogWarning($"[AnimalController] Invalid animation index {actionIndex} for {animalData.animalName}");
+            Debug.LogWarning($"[AnimalController] No valid animation for {animalData.animalName}");
             return;
         }
 
         AnimationClip targetClip = animalData.animationList[actionIndex];
         if (targetClip == null)
         {
-            Debug.LogWarning($"[AnimalController] Animation at index {actionIndex} is null for {animalData.animalName}");
+            Debug.LogWarning($"[AnimalController] Animation clip missing for index {actionIndex} on {animalData.animalName}");
             return;
         }
 
         string stateName = $"Action{actionIndex + 1}";
         overrideController[stateName] = targetClip;
-        Debug.Log($"[Override] {stateName} clip set for {animalData.animalName}: {targetClip.name}");
-        animator.Play(stateName);
-        AudioManager.Instance.PlaySFX(animalData.animalSound);
 
-        Debug.Log($"[AnimalController] Playing {animalData.animalName} : {stateName}");
+        animator.Play(stateName);
+
+        // Play SFX only if available
+        if (animalData.animalSound != null)
+            AudioManager.Instance.PlaySFX(animalData.animalSound);
 
         VFXManager.Instance.PlayVFX(VFXTriggerType.OnPlayAnimation);
+
+        Debug.Log($"[AnimalController] Playing {animalData.animalName} : {stateName}");
     }
 
     public void StopAnimation()
@@ -150,5 +153,12 @@ public class AnimalController : MonoBehaviour
         transform.localPosition = targetPosition; // Ensure exact value at the end
         transform.localRotation = targetRotation;
         transform.localScale = targetScale;
+    }
+
+    public void SetOriginalTransform(Vector3 pos, Quaternion rot, Vector3 scale)
+    {
+        originalPosition = pos;
+        originalRotation = rot;
+        originalScale = scale;
     }
 }

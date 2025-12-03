@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.XR.PXR;
-using UnityEngine.InputSystem;
-using System;
 
 public class AnchorManager : MonoBehaviour
 {

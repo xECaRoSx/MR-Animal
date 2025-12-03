@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject anchoringUI;
     public GameObject selectionUI;
     public GameObject informationUI;
+    public GameObject resultUI;
 
     [Header("Animal Selection Panel")]
     public GameObject animalTooltip; // Tooltip for animal name
@@ -46,7 +47,7 @@ public class UIManager : MonoBehaviour
     public void ShowAnchoringScreen()   => ActivateOnly(anchoringUI);
     public void ShowSelectionScreen()   => ActivateOnly(selectionUI);
     public void ShowInformationScreen() => ActivateOnly(informationUI);
-
+    public void ShowResultScreen() => ActivateOnly(resultUI);
     private void ActivateOnly(GameObject screen)
     {
         HideAllScreens(); // Hide all other screens

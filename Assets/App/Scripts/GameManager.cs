@@ -8,6 +8,7 @@ public enum GameState
     AnchoringState,
     AnimalSelectionState,
     AnimalInfoState,
+    ResultState
 }
 
 public class GameManager : MonoBehaviour
@@ -19,9 +20,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject anchorRoot;
 
-    [Header("Test Settings")]
-    [SerializeField] private bool skipAnchoring = false; // For testing purposes
-
+    [Header("Game Settings")]
+    [Tooltip("If true, AnimalManager will fill remaining spawn points with random animals. If false, only alwaysSpawn animals will be spawned.")]
+    public bool useRandomAnimals = true;
     private bool hasPlayedSelectionVO = false;
 
     private void Awake()
@@ -36,25 +37,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (!skipAnchoring)
-            SetState(GameState.TitleScreenState);
-        else
-            SetState(GameState.AnimalSelectionState);
+        SetState(GameState.TitleScreenState);
     }
 
     // =================== Button Functions: State Change ===================
     public void StartGame()
     {
-        if (skipAnchoring)
-        {
-            SetState(GameState.AnimalSelectionState);
-            Debug.Log("[GameManager] Skipping Anchoring -> Starting at AnimalSelectionState");
-        }
-        else
-        {
-            SetState(GameState.AnchoringState);
-            Debug.Log("[GameManager] StartGame pressed -> Entering AnchoringState");
-        }
+        SetState(GameState.AnchoringState);
+        Debug.Log("[GameManager] StartGame pressed -> Entering AnchoringState");
     }
 
     public void ConfirmButton()
@@ -105,8 +95,9 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.AnimalSelectionState:
+                anchorRoot.SetActive(true);
+                AnimalManager.Instance.SpawnAnimals();
                 UIManager.Instance.ShowSelectionScreen();
-                AnimalManager.Instance.ShowAllAnimals();
                 VFXManager.Instance.StopAllVFX();
 
                 if (!hasPlayedSelectionVO)
@@ -121,6 +112,11 @@ public class GameManager : MonoBehaviour
                 UIManager.Instance.ShowInformationScreen();
                 VFXManager.Instance.PlayVFX(VFXTriggerType.OnEnterInfoState);
                 break;
+
+            case GameState.ResultState:
+                UIManager.Instance.ShowResultScreen();
+                break;
+
             default:
                 Debug.LogWarning("Unhandled game state: " + newState);
                 break;

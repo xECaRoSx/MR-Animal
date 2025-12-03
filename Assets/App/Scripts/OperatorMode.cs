@@ -1,23 +1,37 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Handles the hidden Operator Mode, debug log display,
+/// and utility functions for developer operations.
+/// </summary>
 
 public class OperatorMode : MonoBehaviour
 {
+    [Header("UI References")]
     [SerializeField] private GameObject debugPanel;
     [SerializeField] private TextMeshProUGUI debugText;
+    [SerializeField] private Image randomToggleImage;
+
+    [Header("Tap Detection Settings")]
+    [SerializeField] private float tapThreshold = 1.5f;
+    [SerializeField] private int tapsToUnlock = 8;
+
 
     private int tapCount = 0;
     private float lastTapTime;
-    public float tapThreshold = 1.5f;
 
-    private Queue<string> logQueue = new Queue<string>();
-    private const int maxLogs = 15;
+    private readonly Queue<string> logQueue = new Queue<string>();
+    private const int MaxLogs = 15;
+
+    private bool randomModeEnabled = false;
 
     private void Start()
     {
-        debugPanel.SetActive(false);
+        if (debugPanel != null)
+            debugPanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -30,7 +44,11 @@ public class OperatorMode : MonoBehaviour
         Application.logMessageReceived -= HandleLog;
     }
 
-    public void SecretUnlock()
+    // ---------------------------------------------------------
+    //   SECRET TAP UNLOCK
+    // ---------------------------------------------------------
+
+    public void RegisterSecretTap()
     {
         if (Time.time - lastTapTime > tapThreshold)
             tapCount = 0;
@@ -38,40 +56,100 @@ public class OperatorMode : MonoBehaviour
         tapCount++;
         lastTapTime = Time.time;
 
-        if (tapCount >= 8)
+        if (tapCount >= tapsToUnlock)
         {
-            ActivateOPMode();
+            ActivateOperatorMode();
             tapCount = 0;
         }
     }
 
-    private void ActivateOPMode()
+    private void ActivateOperatorMode()
     {
         if (debugText != null)
-        {
             debugText.text = "<b>[OP]</b> Console logs below\n";
-        }
-        debugPanel.SetActive(true);
-        Debug.Log("[OP] Operator Mode Activated!");
+
+        if (debugPanel != null)
+            debugPanel.SetActive(true);
+
+        Debug.Log("[OP] Operator Mode Activated");
     }
 
-    private void HandleLog(string logString, string stackTrace, LogType type)
-    {
-        string color = "white";
-        switch (type)
-        {
-            case LogType.Warning: color = "yellow"; break;
-            case LogType.Error: color = "red"; break;
-            case LogType.Assert: color = "orange"; break;
-            case LogType.Exception: color = "magenta"; break;
-        }
+    // ---------------------------------------------------------
+    //   LOG HANDLING
+    // ---------------------------------------------------------
 
-        string formatted = $"<color={color}>[{type}] {logString}</color>";
+    private void HandleLog(string message, string stackTrace, LogType type)
+    {
+        string color = type switch
+        {
+            LogType.Warning => "yellow",
+            LogType.Error => "red",
+            LogType.Assert => "orange",
+            LogType.Exception => "magenta",
+            _ => "white"
+        };
+
+        string formatted = $"<color={color}>[{type}] {message}</color>";
         logQueue.Enqueue(formatted);
 
-        if (logQueue.Count > maxLogs)
+        if (logQueue.Count > MaxLogs)
             logQueue.Dequeue();
 
-        debugText.text = string.Join("\n", logQueue.ToArray());
+        if (debugText != null)
+            debugText.text = string.Join("\n", logQueue.ToArray());
+    }
+
+    // ---------------------------------------------------------
+    //   PUBLIC BUTTON FUNCTIONS
+    // ---------------------------------------------------------
+
+    public void CloseOperatorMode()
+    {
+        if (debugPanel != null)
+            debugPanel.SetActive(false);
+
+        logQueue.Clear();
+
+        if (debugText != null)
+            debugText.text = string.Empty;
+
+        tapCount = 0;
+
+        Debug.Log("[OP] Operator Mode Closed");
+    }
+
+    /// <summary>Clears all debug text from the panel.</summary>
+    public void ClearDebugText()
+    {
+        logQueue.Clear();
+        if (debugText != null)
+            debugText.text = "<b>[OP]</b> Logs cleared.\n";
+
+        Debug.Log("[OP] Debug logs cleared");
+    }
+
+    /// <summary>
+    /// Toggles the random animal mode.
+    /// (Will connect with AnimalManager later.)
+    /// </summary>
+    public void ToggleRandomAnimalMode()
+    {
+        randomModeEnabled = !randomModeEnabled;
+
+        if (randomToggleImage != null)
+        {
+            if (randomModeEnabled)
+            {
+                Color onColor;
+                ColorUtility.TryParseHtmlString("#6EFF1E", out onColor);
+                randomToggleImage.color = onColor;
+            }
+            else
+            {
+                randomToggleImage.color = Color.black;
+            }
+        }
+
+        Debug.Log($"[OP] Random Animal Mode: {(randomModeEnabled ? "ON" : "OFF")}");
     }
 }
