@@ -50,6 +50,7 @@ public class AnimalController : MonoBehaviour
         isSelected = true;
 
         GameManager.Instance.SetState(GameState.AnimalInfoState);
+        GameManager.Instance.OnAnimalFound(this);
         AnimalManager.Instance.ShowOnlySelectedAnimal(this);
         UIManager.Instance.ShowAnimalInfo(animalData, this);
 
@@ -77,6 +78,7 @@ public class AnimalController : MonoBehaviour
 
         GameManager.Instance.SetState(GameState.AnimalSelectionState);
         UIManager.Instance.ShowSelectionScreen();
+        UIManager.Instance.statusUI.SetActive(true);
 
         if (moveRoutine != null) StopCoroutine(moveRoutine);
         moveRoutine = StartCoroutine(SmoothTransform(originalPosition, originalRotation, originalScale));

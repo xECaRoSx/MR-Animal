@@ -76,6 +76,7 @@ public class AnimalManager : MonoBehaviour
 
             PlaceAnimalsAtPoints();
             hasSpawned = true;
+            GameManager.Instance.SetMaxAnimals(animalsToSpawn.Count);
         }
 
         foreach (var a in animalsToSpawn)

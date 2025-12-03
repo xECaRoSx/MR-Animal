@@ -10,22 +10,29 @@ public class UIManager : MonoBehaviour
     public GameObject anchoringUI;
     public GameObject selectionUI;
     public GameObject informationUI;
+    public GameObject statusUI;
     public GameObject resultUI;
 
     [Header("Animal Selection Panel")]
-    public GameObject animalTooltip; // Tooltip for animal name
-    public TextMeshProUGUI tooltipText; // Tooltip text for animal name
+    public GameObject animalTooltip;
+    public TextMeshProUGUI tooltipText;
 
     [Header("Animal Information Panel")]
     public TextMeshProUGUI animalNameText;
     public TextMeshProUGUI scientificNameText;
     public TextMeshProUGUI familyText;
-    public GameObject[] conservationIcons; // Conservation status icons
-    [Range(20, 40)]
-    public int maxNameLength = 31; // Max length animal name -> New line if too long
+    public GameObject[] conservationIcons;
+    [Range(20, 40)] public int maxNameLength = 31; // Max length animal name -> New line if too long
+
+    [Header("Status Panel")]
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
+
+    [Header("Result Panel")]
+    public TextMeshProUGUI resultText;
 
     private AnimalController currentAnimal;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,14 +45,14 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        HideAllScreens(); // Hide all screens at the start
-        ShowTitleScreen(); // Show the title screen
+        HideAllScreens();
+        ShowTitleScreen();
     }
 
     // ======================== UI Screen Management ========================
-    public void ShowTitleScreen()       => ActivateOnly(titleUI);
-    public void ShowAnchoringScreen()   => ActivateOnly(anchoringUI);
-    public void ShowSelectionScreen()   => ActivateOnly(selectionUI);
+    public void ShowTitleScreen() => ActivateOnly(titleUI);
+    public void ShowAnchoringScreen() => ActivateOnly(anchoringUI);
+    public void ShowSelectionScreen() => ActivateOnly(selectionUI);
     public void ShowInformationScreen() => ActivateOnly(informationUI);
     public void ShowResultScreen() => ActivateOnly(resultUI);
     private void ActivateOnly(GameObject screen)
@@ -60,8 +67,24 @@ public class UIManager : MonoBehaviour
         anchoringUI.SetActive(false);
         selectionUI.SetActive(false);
         informationUI.SetActive(false);
+        statusUI.SetActive(false);
+        resultUI.SetActive(false);
     }
-    
+    // ================== Status Panel Updates ==================
+    public void UpdateScore(int score, int maxAnimals)
+    {
+        scoreText.text = $"{score}/{maxAnimals}";
+    }
+    public void UpdateTimer(float sec)
+    {
+        int m = Mathf.FloorToInt(sec / 60f);
+        int s = Mathf.FloorToInt(sec % 60f);
+        timerText.text = $"{m:D2}:{s:D2}";
+    }
+    public void UpdateResult(int score, int maxAnimals)
+    {
+        resultText.text = $"{score}/{maxAnimals}";
+    }
     // ==================== Button Functions: UI Actions ====================
     public void AnimationButton(int actionIndex)
     {

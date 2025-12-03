@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8603507053301357796}
   - component: {fileID: 7432453421069418930}
   - component: {fileID: 3253488190597472377}
+  - component: {fileID: 7031092361807590701}
   m_Layer: 0
   m_Name: Anchoring Panel
   m_TagString: Untagged
@@ -123,6 +124,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &7031092361807590701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457846695723996840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65192f153578264fa9d413944228e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  offset: {x: 0, y: 0, z: 1}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  targetAnchor: {fileID: 0}
+  lockPitch: 1
+  rotationLerp: 8
+  minDistance: 0.5
+  maxDistance: 1.4
 --- !u!1 &5016153733361949550
 GameObject:
   m_ObjectHideFlags: 0
