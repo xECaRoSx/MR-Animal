@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimalController : MonoBehaviour
@@ -12,6 +13,11 @@ public class AnimalController : MonoBehaviour
     [SerializeField] private float transitionDuration = 0.5f; // Duration for the transition animation
     [SerializeField] private Collider[] animalCollider;
 
+    [Header("Fade In Materials")]
+    public Material[] fadeMaterials;
+    [SerializeField] private float fadeDuration = 0.5f;
+    [SerializeField] private float fadeDelay = 1f;
+
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Vector3 originalScale;
@@ -19,6 +25,7 @@ public class AnimalController : MonoBehaviour
     private AnimatorOverrideController overrideController;
     private Coroutine moveRoutine;
     private bool isSelected = false;
+    private bool hasFadeInPlayed = false;
 
     private void Awake()
     {
@@ -35,10 +42,15 @@ public class AnimalController : MonoBehaviour
         }
     }
 
+    public bool IsSelected()
+    {
+        return isSelected;
+    }
+
     // ==================== XR Interaction Event Hooks =====================
     public void OnFocus()
     {
-        if (GameManager.Instance.CurrentState != GameState.AnimalSelectionState) return; 
+        if (GameManager.Instance.CurrentState != GameState.AnimalSelectionState) return;
         UIManager.Instance.ShowAnimalTooltip(animalData, this);
     }
 
@@ -106,7 +118,6 @@ public class AnimalController : MonoBehaviour
 
         string stateName = $"Action{actionIndex + 1}";
         overrideController[stateName] = targetClip;
-
         animator.Play(stateName);
 
         // Play SFX only if available
@@ -114,7 +125,6 @@ public class AnimalController : MonoBehaviour
             AudioManager.Instance.PlaySFX(animalData.animalSound);
 
         VFXManager.Instance.PlayVFX(VFXTriggerType.OnPlayAnimation);
-
         Debug.Log($"[AnimalController] Playing {animalData.animalName} : {stateName}");
     }
 
@@ -147,11 +157,11 @@ public class AnimalController : MonoBehaviour
             transform.localPosition = Vector3.Lerp(startPos, targetPosition, t);
             transform.localRotation = Quaternion.Slerp(startRot, targetRotation, t);
             transform.localScale = Vector3.Lerp(startScale, targetScale, t);
-            
+
             elapsedTime += Time.deltaTime;
             yield return null; // Wait for the next frame
         }
-        
+
         transform.localPosition = targetPosition; // Ensure exact value at the end
         transform.localRotation = targetRotation;
         transform.localScale = targetScale;
@@ -162,5 +172,83 @@ public class AnimalController : MonoBehaviour
         originalPosition = pos;
         originalRotation = rot;
         originalScale = scale;
+    }
+
+    public void StartFadeIn()
+    {
+        if (hasFadeInPlayed) return;
+        if (fadeMaterials == null || fadeMaterials.Length == 0)
+            return;
+
+        hasFadeInPlayed = true;
+        StartCoroutine(FadeInRoutine());
+    }
+
+    private IEnumerator FadeInRoutine()
+    {
+        float time = 0f;
+
+        foreach (var mat in fadeMaterials)
+        {
+            if (mat == null) continue;
+
+            SetMaterialTransparent(mat);
+
+            Color c = mat.color;
+            c.a = 0f;
+            mat.color = c;
+        }
+        if (fadeDelay > 0f)
+            yield return new WaitForSeconds(fadeDelay);
+
+        while (time < fadeDuration)
+        {
+            float t = time / fadeDuration;
+
+            foreach (var mat in fadeMaterials)
+            {
+                if (mat == null) continue;
+
+                Color c = mat.color;
+                c.a = Mathf.Lerp(0f, 1f, t);
+                mat.color = c;
+            }
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach (var mat in fadeMaterials)
+        {
+            if (mat == null) continue;
+
+            Color c = mat.color;
+            c.a = 1f;
+            mat.color = c;
+
+            SetMaterialOpaque(mat);
+        }
+    }
+
+    private void SetMaterialTransparent(Material mat)
+    {
+        mat.SetFloat("_Surface", 1); // Transparent
+        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mat.SetInt("_ZWrite", 0);
+        mat.DisableKeyword("_ALPHATEST_ON");
+        mat.EnableKeyword("_ALPHABLEND_ON");
+        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.renderQueue = 3000;
+    }
+
+    private void SetMaterialOpaque(Material mat)
+    {
+        mat.SetFloat("_Surface", 0); // Opaque
+        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mat.SetInt("_ZWrite", 1);
+        mat.DisableKeyword("_ALPHABLEND_ON");
+        mat.renderQueue = -1;
     }
 }

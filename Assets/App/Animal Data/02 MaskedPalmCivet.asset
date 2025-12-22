@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: 02 MaskedPalmCivet
   m_EditorClassIdentifier: 
   animalName: Masked Palm Civet
-  thaiName: "\u0E2D\u0E35\u0E40\u0E2B\u0E47\u0E19\u0E40\u0E04\u0E23\u0E37\u0E2D"
+  thaiName: "\u0E2D\u0E35\u0E40\u0E2B\u0E47\u0E19\u0E2B\u0E19\u0E49\u0E32\u0E02\u0E32\u0E27"
   scientificName: Paguma larvata
   family: Viverridae
-  conservationStatus: 0
+  conservationStatus: 7
   animalPrefab: {fileID: 0}
   idleAnimation: {fileID: 7400000, guid: 9c257d9426dd8744791173ad113d29e7, type: 2}
   animationList:
   - {fileID: 7400000, guid: 5cf7e668065845544a7b6f9f3de44e4f, type: 2}
-  animalSound: {fileID: 0}
-  animalInfoVO: {fileID: 0}
+  animalSound: {fileID: 8300000, guid: f746256d370455b438711ff7be8dc9ff, type: 3}
+  animalInfoVO: {fileID: 8300000, guid: 9c5208a5f971a354691b377d74685e02, type: 3}
   alwaysSpawn: 1

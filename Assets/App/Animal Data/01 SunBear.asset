@@ -17,8 +17,7 @@ MonoBehaviour:
   scientificName: Helarctos malayanus
   family: Ursidae
   conservationStatus: 5
-  animalPrefab: {fileID: 8749999539989632359, guid: 0745ac086b6febf4eba5de40383e6f32,
-    type: 3}
+  animalPrefab: {fileID: 0}
   idleAnimation: {fileID: 7400000, guid: 9c257d9426dd8744791173ad113d29e7, type: 2}
   animationList:
   - {fileID: 7400000, guid: 3d03e4503b4a75e41bc4815183abe7a0, type: 2}

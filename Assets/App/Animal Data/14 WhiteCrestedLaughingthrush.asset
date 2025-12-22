@@ -21,6 +21,6 @@ MonoBehaviour:
   idleAnimation: {fileID: 7400000, guid: 9c257d9426dd8744791173ad113d29e7, type: 2}
   animationList:
   - {fileID: 7400000, guid: 24b7d9fdd5907e649a2467d61563d7e3, type: 2}
-  animalSound: {fileID: 0}
-  animalInfoVO: {fileID: 0}
+  animalSound: {fileID: 8300000, guid: e24163e7e406f194eb08b9d46f95726f, type: 3}
+  animalInfoVO: {fileID: 8300000, guid: 387d624e2f0831848ae3f95e11b26849, type: 3}
   alwaysSpawn: 1

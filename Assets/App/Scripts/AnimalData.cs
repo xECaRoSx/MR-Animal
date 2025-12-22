@@ -21,7 +21,7 @@ public class AnimalData : ScriptableObject
     public AudioClip animalSound;
     public AudioClip animalInfoVO;
 
-    [Tooltip("Tick if this animal must always spawn (used when useRandomAnimals = false or as 'fixed' seeds').")]
+    [Header("Spawn Setting")]
     public bool alwaysSpawn = false;
 }
 public enum ConservationStatus

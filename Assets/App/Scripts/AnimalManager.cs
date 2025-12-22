@@ -83,6 +83,8 @@ public class AnimalManager : MonoBehaviour
         {
             a.gameObject.SetActive(true);
             a.SetColliderActive(true);
+
+            a.StartFadeIn();
         }
 
         foreach (var a in allAnimals)
@@ -111,7 +113,7 @@ public class AnimalManager : MonoBehaviour
                 animal.transform.localPosition,
                 animal.transform.localRotation,
                 animal.transform.localScale
-);
+            );
         }
     }
 
@@ -163,5 +165,24 @@ public class AnimalManager : MonoBehaviour
             animal.SetColliderActive(false);
             animal.gameObject.SetActive(false);
         }
+    }
+
+    public AnimalController GetRandomUnfoundAnimal()
+    {
+        List<AnimalController> available = new List<AnimalController>();
+
+        foreach (var a in animalsToSpawn)
+        {
+            if (a.gameObject.activeSelf && !a.IsSelected())
+            {
+                available.Add(a);
+            }
+        }
+
+        if (available.Count == 0)
+            return null;
+
+        int r = Random.Range(0, available.Count);
+        return available[r];
     }
 }

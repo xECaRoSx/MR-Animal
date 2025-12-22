@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2371618304279603
 Transform:
   m_ObjectHideFlags: 0
@@ -53,6 +53,9 @@ MonoBehaviour:
   transitionDuration: 0.5
   animalCollider:
   - {fileID: 1595038049237991643}
+  fadeMaterials: []
+  fadeDuration: 0.5
+  fadeDelay: 0.5
 --- !u!114 &8165682801652709243
 MonoBehaviour:
   m_ObjectHideFlags: 0

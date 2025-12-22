@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2559439637818706483
 Transform:
   m_ObjectHideFlags: 0
@@ -53,6 +53,9 @@ MonoBehaviour:
   transitionDuration: 0.5
   animalCollider:
   - {fileID: 3033835619684053782}
+  fadeMaterials: []
+  fadeDuration: 0.5
+  fadeDelay: 0.5
 --- !u!114 &7724353455186417997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,17 +315,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c1ad234b7add09240a3d191b75c107eb,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.007
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1ad234b7add09240a3d191b75c107eb,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.007
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1ad234b7add09240a3d191b75c107eb,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.007
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1ad234b7add09240a3d191b75c107eb,
         type: 3}

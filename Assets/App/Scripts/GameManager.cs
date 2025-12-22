@@ -27,6 +27,12 @@ public class GameManager : MonoBehaviour
     [Header("Time Settings")]
     public float playTime = 120f;
 
+    [Header("Auto Pick Settings")]
+    public float autoPickDelay = 30f;
+
+    private float autoPickTimer = 0f;
+    private bool autoPickRunning = false;
+
     private int score = 0;
     private int maxAnimals = 0;
     private float timer = 0f;
@@ -60,6 +66,17 @@ public class GameManager : MonoBehaviour
                 timer = 0;
                 timerRunning = false;
                 EndGame();
+            }
+        }
+
+        if (autoPickRunning && CurrentState == GameState.AnimalSelectionState)
+        {
+            autoPickTimer -= Time.deltaTime;
+
+            if (autoPickTimer <= 0f)
+            {
+                autoPickRunning = false;
+                AutoPickAnimal();
             }
         }
     }
@@ -143,6 +160,8 @@ public class GameManager : MonoBehaviour
                     timer = playTime;
                     timerRunning = true;
                 }
+
+                StartAutoPickTimer();
                 break;
 
             case GameState.AnimalInfoState:
@@ -153,6 +172,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.ResultState:
                 UIManager.Instance.ShowResultScreen(); //UIManager.Instance.statusUI.SetActive(false);
+                anchorRoot.SetActive(false);
                 break;
 
             default:
@@ -167,7 +187,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateScore(score, maxAnimals);
         Debug.Log($"[GameManager] maxAnimals set to {maxAnimals}");
     }
-
     public void OnAnimalFound(AnimalController animal)
     {
         if (!foundAnimals.Contains(animal))
@@ -176,5 +195,31 @@ public class GameManager : MonoBehaviour
             score++;
             UIManager.Instance.UpdateScore(score, maxAnimals);
         }
+        StopAutoPickTimer();
     }
+    private void StartAutoPickTimer()
+    {
+        autoPickTimer = autoPickDelay;
+        autoPickRunning = true;
+    }
+    private void StopAutoPickTimer()
+    {
+        autoPickRunning = false;
+    }
+    private void AutoPickAnimal()
+    {
+        Debug.Log("[GameManager] Auto Pick Triggered!");
+
+        AnimalController target = AnimalManager.Instance.GetRandomUnfoundAnimal();
+
+        if (target != null)
+        {
+            target.OnSelected();
+        }
+        else
+        {
+            Debug.Log("[GameManager] No animal left to auto pick.");
+        }
+    }
+
 }

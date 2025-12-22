@@ -53,6 +53,11 @@ MonoBehaviour:
   transitionDuration: 0.5
   animalCollider:
   - {fileID: 1471643510687892605}
+  fadeMaterials:
+  - {fileID: 2100000, guid: 1dc4ab5bbfd875c4c9e5eeac285b9a37, type: 2}
+  - {fileID: 2100000, guid: d0c413a2431b84b40b0f2db094f5e9be, type: 2}
+  fadeDuration: 2
+  fadeDelay: 1
 --- !u!114 &533196372384704891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,17 +317,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 407262d055dd71245a61383d5b0d23b9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0045
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407262d055dd71245a61383d5b0d23b9,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.0045
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407262d055dd71245a61383d5b0d23b9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.0045
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407262d055dd71245a61383d5b0d23b9,
         type: 3}

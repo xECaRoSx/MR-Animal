@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1449821480005615394
 Transform:
   m_ObjectHideFlags: 0
@@ -52,6 +52,9 @@ MonoBehaviour:
   transitionDuration: 0.5
   animalCollider:
   - {fileID: 9206141631068936869}
+  fadeMaterials: []
+  fadeDuration: 0.5
+  fadeDelay: 0.5
 --- !u!114 &5400461771018007309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,17 +218,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f3dfff6649a930e4f970959fa458db77,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0015
+      value: 0.0035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3dfff6649a930e4f970959fa458db77,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.0015
+      value: 0.0035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3dfff6649a930e4f970959fa458db77,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.0015
+      value: 0.0035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3dfff6649a930e4f970959fa458db77,
         type: 3}
@@ -235,7 +238,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f3dfff6649a930e4f970959fa458db77,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00491
+      value: 0.0114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f3dfff6649a930e4f970959fa458db77,
         type: 3}
