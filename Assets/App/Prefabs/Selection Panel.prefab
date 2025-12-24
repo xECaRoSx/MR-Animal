@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   offset: {x: 0, y: -0.015, z: 0.17}
-  rotationOffset: {x: 0, y: 180, z: 0}
+  rotationOffset: {x: 30, y: 180, z: 0}
   targetAnchor: {fileID: 0}
   lockPitch: 0
   rotationLerp: 8
@@ -613,7 +613,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0E0A\u0E37\u0E48\u0E2D\u0E44\u0E17\u0E22 (\u0E0A\u0E37\u0E48\u0E2D\u0E2A\u0E32\u0E21\u0E31\u0E0D)"
+  m_text: "\u0E04\u0E49\u0E19\u0E2B\u0E32\u0E41\u0E25\u0E30\u0E04\u0E25\u0E34\u0E01\u0E40\u0E25\u0E37\u0E2D\u0E01\u0E2A\u0E31\u0E15\u0E27\u0E4C\u0E17\u0E35\u0E48\u0E15\u0E49\u0E2D\u0E07\u0E01\u0E32\u0E23\u0E14\u0E39\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2bf91ae11a45ce149ab338e76bb05d97, type: 2}
   m_sharedMaterial: {fileID: 4579831589714450183, guid: 2bf91ae11a45ce149ab338e76bb05d97,
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
+  m_fontSize: 6.4
   m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 1

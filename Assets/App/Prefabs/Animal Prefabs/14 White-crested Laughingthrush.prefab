@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalData: {fileID: 11400000, guid: c8f2c9401b490ac4296b76f1f0cd1601, type: 2}
   animator: {fileID: 6939013470883842915}
-  scaleFactor: 5.5
+  infoStateUniformScale: 7
   transitionDuration: 0.5
   animalCollider:
   - {fileID: 5100876677538861452}
@@ -91,6 +91,12 @@ MonoBehaviour:
   m_AllowGazeAssistance: 0
   m_FirstHoverEntered:
     m_PersistentCalls:
+      m_Calls: []
+  m_LastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverEntered:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 183687606581107142}
         m_TargetAssemblyTypeName: AnimalController, Assembly-CSharp
@@ -104,7 +110,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_LastHoverExited:
+  m_HoverExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
@@ -119,12 +125,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_HoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -337,7 +337,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a1f99ab50c56d3e4f96d90e387bca72d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00106
+      value: 0.0033
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a1f99ab50c56d3e4f96d90e387bca72d,
         type: 3}

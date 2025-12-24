@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalData: {fileID: 11400000, guid: e7191cfad6148f34bb7088ba152d3857, type: 2}
   animator: {fileID: 6841878840090499319}
-  scaleFactor: 4
+  infoStateScale: {x: 5, y: 5, z: 5}
   transitionDuration: 0.5
   animalCollider:
   - {fileID: 9084455437039716034}
@@ -91,6 +91,12 @@ MonoBehaviour:
   m_AllowGazeAssistance: 0
   m_FirstHoverEntered:
     m_PersistentCalls:
+      m_Calls: []
+  m_LastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverEntered:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8749999539989632359}
         m_TargetAssemblyTypeName: AnimalController, Assembly-CSharp
@@ -104,7 +110,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_LastHoverExited:
+  m_HoverExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
@@ -119,12 +125,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_HoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -317,17 +317,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: da7d346eb40d02a48a607b73764530e7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.012
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da7d346eb40d02a48a607b73764530e7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.012
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da7d346eb40d02a48a607b73764530e7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.012
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da7d346eb40d02a48a607b73764530e7,
         type: 3}
@@ -342,7 +342,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: da7d346eb40d02a48a607b73764530e7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da7d346eb40d02a48a607b73764530e7,
         type: 3}

@@ -9,8 +9,8 @@ public class AnimalController : MonoBehaviour
     public Animator animator;
 
     [Header("Transform Settings")]
-    [SerializeField] private float scaleFactor = 5.5f; // Scale factor for the animal when selected
-    [SerializeField] private float transitionDuration = 0.5f; // Duration for the transition animation
+    [SerializeField] private float infoStateUniformScale = 5f;
+    [SerializeField] private float transitionDuration = 0.5f;
     [SerializeField] private Collider[] animalCollider;
 
     [Header("Fade In Materials")]
@@ -77,7 +77,7 @@ public class AnimalController : MonoBehaviour
         // --- Transform movement ---
         Vector3 targetPos = new Vector3(0, originalPosition.y, 0);
         Quaternion targetRot = Quaternion.identity;
-        Vector3 targetScale = originalScale * scaleFactor;
+        Vector3 targetScale = Vector3.one * infoStateUniformScale;
 
         if (moveRoutine != null) StopCoroutine(moveRoutine);
         moveRoutine = StartCoroutine(SmoothTransform(targetPos, targetRot, targetScale));
